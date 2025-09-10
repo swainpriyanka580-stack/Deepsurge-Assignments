@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 40px;
+    }
+    .form-container {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Register</h2>
+    <form id="registrationForm">
+      <label>Full Name:</label>
+      <input type="text" id="fullname" placeholder="Enter full name">
+      <div id="nameError" class="error"></div>
+
+      <label>Email:</label>
+      <input type="text" id="email" placeholder="Enter email">
+      <div id="emailError" class="error"></div>
+
+      <label>Password:</label>
+      <input type="password" id="password" placeholder="Enter password">
+      <div id="passwordError" class="error"></div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form from refreshing
+
+      // Get input values
+      let name = document.getElementById("fullname").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      // Error message elements
+      let nameError = document.getElementById("nameError");
+      let emailError = document.getElementById("emailError");
+      let passwordError = document.getElementById("passwordError");
+
+      // Clear previous errors
+      nameError.textContent = "";
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      let isValid = true;
+
+      // Validation checks
+      if (name === "") {
+        nameError.textContent = "Full name is required";
+        isValid = false;
+      }
+
+      if (email === "") {
+        emailError.textContent = "Email is required";
+        isValid = false;
+      } else if (!email.includes("@") || !email.includes(".")) {
+        emailError.textContent = "Invalid email format";
+        isValid = false;
+      }
+
+      if (password === "") {
+        passwordError.textContent = "Password is required";
+        isValid = false;
+      } else if (password.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters";
+        isValid = false;
+      }
+
+      // If all validations pass
+      if (isValid) {
+        console.log("Registration Successful!");
+        console.log("Full Name:", name);
+        console.log("Email:", email);
+        console.log("Password:", password);
+
+        alert("Registration Successful!");
+        document.getElementById("registrationForm").reset(); // Clear form
+      }
+    });
+  </script>
+</body>
+</html>
