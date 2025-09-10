@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input {
+      margin: 5px 0;
+      padding: 5px;
+      width: 250px;
+    }
+    button {
+      margin: 10px 0;
+      padding: 6px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    ul {
+      margin-top: 15px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Registration</h2>
+
+  <form id="studentForm">
+    <label>Full Name:</label><br>
+    <input type="text" id="fullName"><br>
+    
+    <label>Email Address:</label><br>
+    <input type="text" id="email"><br>
+    
+    <button type="submit">Add Student</button>
+  </form>
+
+  <h3>Student List:</h3>
+  <ul id="studentList"></ul>
+
+  <script>
+    document.getElementById("studentForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let name = document.getElementById("fullName").value.trim();
+      let email = document.getElementById("email").value.trim();
+
+      // Validation
+      if (name === "" || email === "") {
+        alert("Both fields are required!");
+        return;
+      }
+      if (!email.includes("@")) {
+        alert("Invalid email format! Must contain @");
+        return;
+      }
+
+      // Add student to list
+      let li = document.createElement("li");
+      li.innerHTML = <b>Name:</b> ${name}, <b>Email:</b> <a href="mailto:${email}">${email}</a>;
+      document.getElementById("studentList").appendChild(li);
+
+      // Clear form
+      document.getElementById("studentForm").reset();
+    });
+  </script>
+</body>
+</html>
